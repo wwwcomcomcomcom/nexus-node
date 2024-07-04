@@ -1,0 +1,20 @@
+{
+  "name": "nexus",
+  "version": "1.0.0",
+  "description": "idea festival",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "build": "tsc -p .",
+    "dev": "nodemon --watch \"src/**/*.ts\" --exec \"ts-node\" src/index.ts"
+  },
+  "author": "wwwcomcomcomcom",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.14.9",
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2"
+  }
+}
