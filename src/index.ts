@@ -11,14 +11,23 @@ app.get('/', (req, res) => {
     res.send('Hello, World!');
 });
 
+interface ChatMessageDto {
+    room: string;
+    message: string;
+}
+
 io.on('connection', (socket: Socket) => {
     console.log('A user connected');
 
-    socket.on('chat message', (msg: string) => {
-        console.log('Message:', msg);
-        io.emit('chat message', msg);
+    socket.on('chat message', (chatRequest: ChatMessageDto) => {
+        io.to(chatRequest.room).emit('chat message', chatRequest.message);
     });
-
+    socket.on("join room", (room: string) => {
+        socket.join(room);
+    });
+    socket.on("leave room", (room: string) => {
+        socket.leave(room);
+    });
     socket.on('disconnect', () => {
         console.log('A user disconnected');
     });
