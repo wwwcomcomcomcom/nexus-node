@@ -17,7 +17,9 @@ class ChatController {
     //authorization
     socket.request.headers.authorization;
 
-    socket.on("chat message", this.onChat);
+    socket.on("chat message", (chatRequest: ChatRequestDto) =>
+      this.onChat(socket, chatRequest)
+    );
     socket.on("join room", (room: string) => {
       socket.join(room);
     });
@@ -29,7 +31,10 @@ class ChatController {
     });
   }
 
-  onChat(chatRequest: ChatRequestDto) {
+  onChat(socket: Socket, chatRequest: ChatRequestDto) {
     this.chatService.sendMessage(chatRequest);
   }
+  joinRoom(socket: Socket, room: string) {}
+  leaveRoom(socket: Socket, room: string) {}
+  disconnect(socket: Socket) {}
 }

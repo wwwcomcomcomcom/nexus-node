@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { ChatRequestDto } from "./chatRequestDto";
 import { ChatRepository } from "./chatRepository";
+import { Chat } from "./entity/chat";
 
 export class ChatService {
   constructor(private chatRepository: ChatRepository) {}
@@ -10,12 +11,3 @@ export class ChatService {
     await this.chatRepository.save(chat);
   }
 }
-const Chat = mongoose.model(
-  "Chat",
-  new mongoose.Schema({
-    room: String,
-    message: String,
-    sender: String,
-    timeStamp: { type: Date, default: Date.now() },
-  })
-);
